@@ -95,32 +95,12 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: "HomePlans",
-  data() {
-    return {
-      recipes: []
-    };
-  },
+
   methods: {
     showRecipes(plan) {
-      axios.get('https://api.edamam.com/search', {
-        params: {
-          q: plan,
-          app_id: "48310613",
-          app_key: "320511544dcb1cca4c2c66bb0ec79cac",
-          from: 0,
-          to: 0
-        }
-      }).then(response => {
-        response = response.data;
-        this.recipes = response.hits;
-      }).catch((err) => {
-        this.recipes = [];
-        alert(err.message);
-      });
+      this.$store.dispatch('getRecipes', plan)
     }
   }
 }
