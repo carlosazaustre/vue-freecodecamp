@@ -1,13 +1,12 @@
 <template>
   <v-container grid-list-lg>
     <v-layout row>
-      <v-flex xs12 class="text-xs-center display-1 font-weight-black my-5"
-        >Available Meal Plans</v-flex
-      >
+      <v-flex xs12 class="text-xs-center display-1 font-weight-black my-5">Available Meal Plans</v-flex>
     </v-layout>
     <v-layout row wrap>
       <v-flex xs12 sm12 md4>
         <v-card>
+          <v-responsive>
           <v-img src="http://source.unsplash.com/hjCA3ecCXAQ" height="500px">
             <v-container fill-height fluid>
               <v-layout fill-height>
@@ -17,7 +16,8 @@
               </v-layout>
             </v-container>
           </v-img>
-          <v-card-title primary-title>
+          </v-responsive>
+          <v-card-text>
             <div>
               <h3 class="headline mb-0">Keto</h3>
               <div>
@@ -26,11 +26,16 @@
                 eget velit eu dui tristique lobortis sit amet vel tellus.
               </div>
             </div>
-          </v-card-title>
+          </v-card-text>
+          <v-card-actions v-if="['menu'].includes($route.name)">
+            <v-btn outline block color="green" @click="showRecipes('keto')">Select this plan</v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
+
       <v-flex xs12 sm12 md4>
         <v-card>
+          <v-responsive>
           <v-img src="http://source.unsplash.com/6S27S6pZ6o0" height="500px">
             <v-container fill-height fluid>
               <v-layout fill-height>
@@ -40,7 +45,8 @@
               </v-layout>
             </v-container>
           </v-img>
-          <v-card-title primary-title>
+          </v-responsive>
+          <v-card-text>
             <div>
               <h3 class="headline mb-0">Paleo</h3>
               <div>
@@ -49,12 +55,16 @@
                 eget velit eu dui tristique lobortis sit amet vel tellus.
               </div>
             </div>
-          </v-card-title>
+          </v-card-text>
+          <v-card-actions v-if="['menu'].includes($route.name)">
+            <v-btn outline block color="green" @click="showRecipes('paleo')">Select this plan</v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
 
       <v-flex xs12 sm12 md4>
         <v-card>
+          <v-responsive>
           <v-img src="http://source.unsplash.com/1SPu0KT-Ejg" height="500px">
             <v-container fill-height fluid>
               <v-layout fill-height>
@@ -64,7 +74,8 @@
               </v-layout>
             </v-container>
           </v-img>
-          <v-card-title primary-title>
+          </v-responsive>
+          <v-card-text>
             <div>
               <h3 class="headline mb-0">Vegan</h3>
               <div>
@@ -73,7 +84,10 @@
                 eget velit eu dui tristique lobortis sit amet vel tellus.
               </div>
             </div>
-          </v-card-title>
+          </v-card-text>
+          <v-card-actions v-if="['menu'].includes($route.name)">
+            <v-btn outline block color="green" @click="showRecipes('vegan')">Select this plan</v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
@@ -81,8 +95,34 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: "HomePlans"
+  name: "HomePlans",
+  data() {
+    return {
+      recipes: []
+    };
+  },
+  methods: {
+    showRecipes(plan) {
+      axios.get('https://api.edamam.com/search', {
+        params: {
+          q: plan,
+          app_id: "48310613",
+          app_key: "320511544dcb1cca4c2c66bb0ec79cac",
+          from: 0,
+          to: 0
+        }
+      }).then(response => {
+        response = response.data;
+        this.recipes = response.hits;
+      }).catch((err) => {
+        this.recipes = [];
+        alert(err.message);
+      });
+    }
+  }
 }
 </script>
 
