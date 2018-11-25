@@ -25,7 +25,7 @@ export default new Vuex.Store({
             app_id: "48310613",
             app_key: "320511544dcb1cca4c2c66bb0ec79cac",
             from: 0,
-            to: 0
+            to: 9
           }
         });
         commit("setRecipes", response.data.hits);

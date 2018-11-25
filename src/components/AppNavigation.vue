@@ -23,7 +23,7 @@
       <router-link to="/">
         <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
       </router-link>
-      <v-btn class="hidden-sm-and-down" flat>Menu</v-btn>
+      <v-btn class="hidden-sm-and-down" to="/menu" flat>Menu</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
       <v-btn class="hidden-sm-and-down" flat to="/sign-in">SIGN IN</v-btn>
       <v-btn class="hidden-sm-and-down" color="brown lighten-3" to="/join">JOIN</v-btn>
