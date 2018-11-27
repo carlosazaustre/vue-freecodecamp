@@ -18,7 +18,10 @@
     </v-navigation-drawer>
 
     <v-toolbar app color="brown darken-4" dark>
-      <v-toolbar-side-icon class="hidden-md-and-up" @click="drawer = !drawer;"></v-toolbar-side-icon>
+      <v-toolbar-side-icon
+        class="hidden-md-and-up"
+        @click="drawer = !drawer;"
+      ></v-toolbar-side-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
       <router-link to="/">
         <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
@@ -26,7 +29,9 @@
       <v-btn class="hidden-sm-and-down" to="/menu" flat>Menu</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
       <v-btn class="hidden-sm-and-down" flat to="/sign-in">SIGN IN</v-btn>
-      <v-btn class="hidden-sm-and-down" color="brown lighten-3" to="/join">JOIN</v-btn>
+      <v-btn class="hidden-sm-and-down" color="brown lighten-3" to="/join"
+        >JOIN</v-btn
+      >
     </v-toolbar>
   </span>
 </template>
@@ -50,4 +55,3 @@ a {
   text-decoration: none;
 }
 </style>
-

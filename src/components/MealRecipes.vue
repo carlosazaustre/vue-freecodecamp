@@ -10,7 +10,9 @@
             <div class="title my-5">{{ item.recipe.label }}</div>
             <div class="subheading">Ingredients</div>
             <ul>
-              <li v-for="(ingredient, i) in item.recipe.ingredients" :key="i">{{ ingredient.text }}</li>
+              <li v-for="(ingredient, i) in item.recipe.ingredients" :key="i">
+                {{ ingredient.text }}
+              </li>
             </ul>
           </v-card-text>
           <v-card-actions>
@@ -19,7 +21,7 @@
         </v-card>
       </v-flex>
     </v-layout>
-  </v-container>  
+  </v-container>
 </template>
 
 <script>
