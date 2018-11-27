@@ -14,6 +14,12 @@ export default new Vuex.Store({
     isAuthenticated: false
   },
 
+  getters: {
+    isAuthenticated(state) {
+      return state.user !== null && state.user !== undefined;
+    }
+  },
+
   mutations: {
     setRecipes(state, payload) {
       state.recipes = payload;
@@ -56,7 +62,22 @@ export default new Vuex.Store({
           commit("setIsAuthenticated", false);
           router.push("/");
         });
-  },
+    },
+    userLogout({ commit }) {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          commit("setUser", null);
+          commit("setIsAuthenticated", false);
+          router.push("/");
+        })
+        .catch(() => {
+          commit("setUser", null);
+          commit('setIsAuthenticated', false);
+          router.push('/');
+        });
+    }
     async getRecipes({ state, commit }, plan) {
       try {
         const response = await axios.get(`${state.apiUrl}`, {

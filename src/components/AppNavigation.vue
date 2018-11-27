@@ -28,10 +28,11 @@
       </router-link>
       <v-btn class="hidden-sm-and-down" to="/menu" flat>Menu</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
-      <v-btn class="hidden-sm-and-down" flat to="/sign-in">SIGN IN</v-btn>
-      <v-btn class="hidden-sm-and-down" color="brown lighten-3" to="/join"
-        >JOIN</v-btn
-      >
+      <div v-if="!isAuthenticated" class="hidden-sm-and-down">
+        <v-btn class="hidden-sm-and-down" flat to="/sign-in">SIGN IN</v-btn>
+        <v-btn class="hidden-sm-and-down" color="brown lighten-3" to="/join">JOIN</v-btn>
+      </div>
+      <v-btn v-else outline color="white" @click="logout">Logout</v-btn>  
     </v-toolbar>
   </span>
 </template>
@@ -45,6 +46,16 @@ export default {
       drawer: false,
       items: [{ title: "Menu" }, { title: "Sign In" }, { title: "Join" }]
     };
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("userSignOut");
+    }
   }
 };
 </script>
