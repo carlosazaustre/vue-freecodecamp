@@ -44,7 +44,7 @@ export default {
     return {
       valid: false,
       email: "",
-      password: "",
+      password: ""
     };
   },
 

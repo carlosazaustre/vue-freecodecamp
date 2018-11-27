@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import router from "@/router";
 import firebase from "@/firebase";
 
 Vue.use(Vuex);
@@ -33,12 +34,29 @@ export default new Vuex.Store({
         .then(user => {
           commit("setUser", user);
           commit("setIsAuthenticated", true);
+          router.push("/about");
         })
         .catch(() => {
           commit("setUser", null);
           commit("setIsAuthenticated", false);
+          router.push("/");
         });
     },
+    userLogin({ commit }, { email, password }) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(user => {
+          commit("setUser", user);
+          commit("setIsAuthenticated", true);
+          router.push("/about");
+        })
+        .catch(() => {
+          commit("setUser", null);
+          commit("setIsAuthenticated", false);
+          router.push("/");
+        });
+  },
     async getRecipes({ state, commit }, plan) {
       try {
         const response = await axios.get(`${state.apiUrl}`, {
