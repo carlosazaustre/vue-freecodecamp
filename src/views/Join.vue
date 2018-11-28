@@ -7,7 +7,7 @@
             <v-toolbar-title>Join Form</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form" lazy-validation>
               <v-text-field
                 prepend-icon="person"
                 name="email"
@@ -42,7 +42,6 @@ export default {
   name: "Join",
   data() {
     return {
-      valid: false,
       email: "",
       password: ""
     };

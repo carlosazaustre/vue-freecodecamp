@@ -74,10 +74,17 @@ export default new Vuex.Store({
         })
         .catch(() => {
           commit("setUser", null);
-          commit('setIsAuthenticated', false);
-          router.push('/');
+          commit("setIsAuthenticated", false);
+          router.push("/");
         });
-    }
+    },
+    addRecipe({ state }, payload) {
+      firebase
+        .database()
+        .ref("users")
+        .child(state.user.user.uid)
+        .push(payload.label);
+    },
     async getRecipes({ state, commit }, plan) {
       try {
         const response = await axios.get(`${state.apiUrl}`, {

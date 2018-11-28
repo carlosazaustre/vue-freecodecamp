@@ -7,14 +7,13 @@
             <v-toolbar-title>Login Form</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form" lazy-validation>
               <v-text-field
                 prepend-icon="person"
                 name="email"
                 label="Email"
                 type="email"
                 v-model="email"
-                :rules="emailRules"
                 required
               >
               </v-text-field>
@@ -26,14 +25,13 @@
                 type="password"
                 required
                 v-model="password"
-                :rules="passwordRules"
               >
               </v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" :disabled="!valid" @click="submit"
+            <v-btn color="primary" @click="submit"
               >Login</v-btn
             >
           </v-card-actions>
@@ -48,7 +46,6 @@ export default {
   name: "Signin",
   data() {
     return {
-      valid: false,
       email: "",
       password: ""
     };
